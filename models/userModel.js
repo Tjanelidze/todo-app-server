@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { hash } from 'bcrypt';
 
 const userSchema = new Schema(
   {
@@ -49,6 +50,18 @@ userSchema.virtual('userTodos', {
   localField: '_id',
   foreignField: 'userId',
   justOne: false,
+});
+
+userSchema.pre('save', async function (next) {
+  // Only hash the password if it has been modified (or is new)
+  if (!this.isModified('password')) return next();
+
+  const hashedPassword = await hash(this.password, 10);
+
+  this.password = hashedPassword;
+
+  this.passwordConfirm = undefined;
+  next();
 });
 
 const User = model('User', userSchema);
