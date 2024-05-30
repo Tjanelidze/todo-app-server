@@ -9,7 +9,7 @@ const createTodo = async (req, res, next) => {
   }
 };
 
-const getTodos = async (req, res, next) => {
+const getAllTodos = async (req, res, next) => {
   try {
     const todos = await Todo.find();
     res.status(200).json(todos);
@@ -20,5 +20,5 @@ const getTodos = async (req, res, next) => {
 
 export default {
   createTodo,
-  getTodos,
+  getAllTodos,
 };

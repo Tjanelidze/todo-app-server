@@ -5,7 +5,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(todosController.getTodos)
+  .get(todosController.getAllTodos)
   .post(todosController.createTodo);
 
 export default router;
