@@ -36,7 +36,6 @@ const getAllTodos = async (req, res, next) => {
 
 const deleteTodo = async (req, res, next) => {
   try {
-    console.log(req.param.id);
     const todo = await Todo.findByIdAndDelete(req.params.id);
 
     if (!todo) {
