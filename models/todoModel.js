@@ -23,7 +23,11 @@ const todoSchema = new Schema({
     enum: ['low', 'medium', 'high'],
     default: 'medium',
   },
-  userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  user: {
+    type: Schema.ObjectId,
+    ref: 'User',
+    requried: [true, 'Review must belong to a user'],
+  },
 });
 
 const Todo = model('Todo', todoSchema);
