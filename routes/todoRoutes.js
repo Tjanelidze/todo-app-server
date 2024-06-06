@@ -1,11 +1,12 @@
 import express from 'express';
 import todosController from '../controllers/todosController.js';
+import authController from '../controllers/authController.js';
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(todosController.getAllTodos)
-  .post(todosController.createTodo);
+  .get(authController.protect, todosController.getAllTodos)
+  .post(authController.protect, todosController.createTodo);
 
 export default router;
