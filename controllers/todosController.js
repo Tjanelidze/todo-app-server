@@ -27,8 +27,7 @@ const createTodo = async (req, res, next) => {
 
 const getAllTodos = async (req, res, next) => {
   try {
-    const user = await User.findOne({ _id: req.user.id });
-    const todos = await Todo.find();
+    const todos = await Todo.find({ user: req.user.id });
     res.status(200).json(todos);
   } catch (error) {
     res.status(500).json({ error: error.message });
