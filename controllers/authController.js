@@ -109,7 +109,20 @@ const protect = async (req, res, next) => {
   }
 };
 
+const logout = async (req, res, next) => {
+  try {
+    res.cookie('jwt', 'loggedout', {
+      expires: new Date(Date.now() + 10 * 1000),
+      httpOnly: true,
+    });
+    res.status(200).json({ status: 'success' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export default {
+  logout,
   signup,
   login,
   protect,
