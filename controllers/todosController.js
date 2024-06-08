@@ -51,8 +51,26 @@ const deleteTodo = async (req, res, next) => {
   }
 };
 
+const updateTodo = async (req, res, next) => {
+  try {
+    const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!todo) {
+      return res.status(404).json({ error: 'No document found with that ID' });
+    }
+
+    res.status(200).json(todo);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export default {
   createTodo,
   getAllTodos,
   deleteTodo,
+  updateTodo,
 };

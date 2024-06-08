@@ -9,6 +9,9 @@ router
   .get(authController.protect, todosController.getAllTodos)
   .post(authController.protect, todosController.createTodo);
 
-router.route('/:id').delete(authController.protect, todosController.deleteTodo);
+router
+  .route('/:id')
+  .patch(authController.protect, todosController.updateTodo)
+  .delete(authController.protect, todosController.deleteTodo);
 
 export default router;
