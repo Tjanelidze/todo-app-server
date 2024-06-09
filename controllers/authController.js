@@ -31,6 +31,17 @@ const createSendToken = (user, statusCode, res) => {
 
 const signup = async (req, res, next) => {
   try {
+    const { email } = req.body;
+    const oldUser = await User.findOne({ email });
+
+    // Check if user with email exists
+    if (oldUser) {
+      return res
+        .status(400)
+        .json({ error: 'User with this email already exists', field: 'email' });
+    }
+
+    // Create new user
     const newUser = await User.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
