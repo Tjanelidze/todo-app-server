@@ -73,14 +73,20 @@ const login = async (req, res, next) => {
     if (!user) {
       return res
         .status(401)
-        .json({ error: 'Invalid credentials. User does not exist.' });
+        .json({
+          error: 'Invalid credentials. User does not exist.',
+          field: 'email',
+        });
     }
 
     // Check if password is correct
     if (!(await user.correctPassword(password, user.password))) {
       return res
         .status(401)
-        .json({ error: 'Password is incorrect! please try again' });
+        .json({
+          error: 'Password is incorrect! please try again',
+          field: 'password',
+        });
     }
 
     // If everything ok, send token to client
