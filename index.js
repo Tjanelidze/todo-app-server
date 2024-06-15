@@ -1,23 +1,20 @@
-import express from 'express';
-import userRouter from './routes/userRoutes.js';
-import todoRouter from './routes/todoRoutes.js';
-import cookieParser from 'cookie-parser';
+import app from './app.js';
+import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 
-import cors from 'cors';
+dotenv.config({ path: './.env.local' });
 
-const app = express();
+const DB = process.env.MONGODB_URI.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD
+);
 
-const corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-};
+mongoose.connect(DB).then(() => console.log('DB connection successfull'));
 
-app.use(cors(corsOptions));
-app.use(express.json({ limit: '10kb' }));
-app.use(cookieParser());
+const port = process.env.PORT || 4000;
 
-// Routes
-app.use('/api/v1/users', userRouter);
-app.use('/api/v1/todos', todoRouter);
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});
 
 export default app;
