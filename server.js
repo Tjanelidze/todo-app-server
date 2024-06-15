@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 
 dotenv.config({ path: './config.env' });
 
-const DB = process.env.DATABASE.replace(
+const DB = process.env.MONGODB_URI.replace(
   '<PASSWORD>',
   process.env.DATABASE_PASSWORD
 );
