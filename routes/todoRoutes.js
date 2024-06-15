@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(authController.protect, todosController.getAllTodos)
+  .get(todosController.getAllTodos)
   .post(authController.protect, todosController.createTodo);
 
 router

@@ -7,8 +7,7 @@
   "scripts": {
     "start": "nodemon ./server.js",
     "lint": "eslint .",
-    "test": "jest --watchAll",
-    "vercel-build": "echo hello"
+    "test": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
