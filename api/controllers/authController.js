@@ -33,7 +33,6 @@ const signup = async (req, res, next) => {
   try {
     const { email } = req.body;
     const oldUser = await User.findOne({ email });
-
     // Check if user with email exists
     if (oldUser) {
       return res
@@ -58,7 +57,7 @@ const signup = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = JSON.parse(req.body);
 
     const user = await User.findOne({ email }).select('+password');
 
