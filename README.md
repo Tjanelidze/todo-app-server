@@ -29,7 +29,6 @@ To run this project, you need to have Node.js installed on your machine. To run 
 - MongoDB
 - Mongoose
 - JSON Web Tokens
-- Jest
 - ESLint
 - Prettier
 - Vercel
